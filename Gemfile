@@ -36,13 +36,14 @@ gem 'faker'
 gem 'hirb'
 gem 'better_errors'
 gem 'binding_of_caller'
-gem 'jazz-fingers'
 gem 'pry'
+gem 'jazz_fingers'
 gem 'devise'
 gem 'bcrypt'
-gem 'simple-form'
+gem 'simple_form'
 gem 'webpacker'
 gem 'react-rails'
+
 
 
 
@@ -52,11 +53,8 @@ group :development, :test do
    gem 'rspec-rails', '~> 3.6'
    gem 'factory_girl_rails', '~> 4.8'
    gem 'cucumber-rails', '~> 1.5', :require => false
-   gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
    gem 'guard-rspec'
-   gem 'shoulda_matchers'
-
-end
+ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
