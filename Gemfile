@@ -42,9 +42,7 @@ gem 'devise'
 gem 'bcrypt'
 gem 'simple_form'
 gem 'webpacker'
-gem 'react-rails'
-
-
+gem 'foreman'
 
 
 group :development, :test do
