@@ -6,20 +6,20 @@ export const getCoinIndexRequest = () => {
   return {
     type: GET_COIN_INDEX_REQUEST,
   };
-}
+};
 export const getCoinIndexSuccess = (data) => {
   return {
     type: GET_COIN_INDEX_SUCCESS,
     data: data
   };
-}
+};
 export const getCoinIndexFailure = (error) => {
   return {
     type: GET_COIN_INDEX_FAILURE,
     data: error
   };
-}
+};
 export const getCoinIndex = () => {
   //TO DO
   return;
-}
+};
