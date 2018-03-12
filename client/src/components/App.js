@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../App.css';
 import {
-  NavLink, 
+  NavLink,
   // Link,
-  BrowserRouter as Router, 
-  Switch, 
+  BrowserRouter as Router,
+  Switch,
   Route
 } from 'react-router-dom';
 import { Button } from 'reactstrap';
@@ -16,7 +16,7 @@ const Home = () => {
       <h2>Home</h2>
     </div>
   );
-}
+};
 
 const Test = () => {
   return (
@@ -24,7 +24,7 @@ const Test = () => {
       <h2>Test</h2>
     </div>
   );
-}
+};
 
 class App extends Component {
   constructor() {
