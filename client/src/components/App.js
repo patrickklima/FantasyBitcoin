@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../App.css';
 import {
-  // NavLink, 
-  Link,
+  NavLink, 
+  // Link,
   BrowserRouter as Router, 
   Switch, 
   Route
@@ -14,6 +14,14 @@ const Home = () => {
   return (
     <div>
       <h2>Home</h2>
+    </div>
+  );
+}
+
+const Test = () => {
+  return (
+    <div>
+      <h2>Test</h2>
     </div>
   );
 }
@@ -39,19 +47,24 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App">
-          <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-          </header>
-          {this.state.apiMessage
-            ? <p>{this.state.apiMessage}</p>
-            : <Button color="success" onClick={this.getResponse}>Get Server Response</Button>
-          }
+        <div>
+          <NavLink to='/'>Home</NavLink><br />
+          <NavLink to='/test'>Test</NavLink><br />
+          <div className="App">
+            <header className="App-header">
+              <img src={logo} className="App-logo" alt="logo" />
+              <h1 className="App-title">Welcome to React</h1>
+            </header>
+            {this.state.apiMessage
+              ? <p>{this.state.apiMessage}</p>
+              : <Button color="success" onClick={this.getResponse}>Get Server Response</Button>
+            }
+          </div>
+          <Switch>
+            <Route exact path='/' component={Home}/>
+            <Route path='/test' render={(apiMessage, getResponse) => <Test />}/>
+          </Switch>
         </div>
-        <Switch>
-          <Route exact path='/' component={Home}/>
-        </Switch>
       </Router>
     );
   }
