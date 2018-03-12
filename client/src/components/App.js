@@ -62,7 +62,7 @@ class App extends Component {
           </div>
           <Switch>
             <Route exact path='/' component={Home}/>
-            <Route path='/test' render={(apiMessage, getResponse) => <Test />}/>
+            <Route path='/test' component={Test}/>
           </Switch>
         </div>
       </Router>
