@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../App.css';
 import PortfolioContainer from '../containers/PortfolioContainer';
+import CoinIndexContainer from '../containers/CoinIndexContainer';
 import {
   NavLink, 
   // Link,
@@ -52,6 +53,7 @@ class App extends Component {
           <NavLink to='/'>Home</NavLink><br />
           <NavLink to='/test'>Test</NavLink><br />
           <NavLink to='/portfolio'>Portfolio</NavLink><br />
+          <NavLink to='/coins'>Coins</NavLink><br />
           <div className="App">
             <header className="App-header">
               <img src={logo} className="App-logo" alt="logo" />
@@ -66,6 +68,7 @@ class App extends Component {
             <Route exact path='/' component={Home}/>
             <Route path='/test' component={Test}/>
             <Route path='/portfolio' component={PortfolioContainer}/>
+            <Route path='/coins' component={CoinIndexContainer}/>
           </Switch>
         </div>
       </Router>
