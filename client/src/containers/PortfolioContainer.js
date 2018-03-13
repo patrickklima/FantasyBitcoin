@@ -17,13 +17,13 @@ class PortfolioContainer extends Component {
       <div>
         <h2>PortfolioContainer</h2>
       </div>
-    )
+    );
   }
 }
 
 PortfolioContainer.propTypes = {
 
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(PortfolioContainer);
 
