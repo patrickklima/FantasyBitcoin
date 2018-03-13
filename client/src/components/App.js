@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../App.css';
+import PortfolioContainer from '../containers/PortfolioContainer';
+import CoinIndexContainer from '../containers/CoinIndexContainer';
+import TransactionsContainer from '../containers/TransactionsContainer';
 import {
   NavLink,
   // Link,
@@ -50,6 +53,9 @@ class App extends Component {
         <div>
           <NavLink to='/'>Home</NavLink><br />
           <NavLink to='/test'>Test</NavLink><br />
+          <NavLink to='/portfolio'>Portfolio</NavLink><br />
+          <NavLink to='/coins'>Coins</NavLink><br />
+          <NavLink to='/transactions'>Transactions</NavLink><br />
           <div className="App">
             <header className="App-header">
               <img src={logo} className="App-logo" alt="logo" />
@@ -63,6 +69,9 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={Home}/>
             <Route path='/test' component={Test}/>
+            <Route path='/portfolio' component={PortfolioContainer}/>
+            <Route path='/coins' component={TransactionsContainer}/>
+            <Route path='/transactions' component={TransactionsContainer}/>
           </Switch>
         </div>
       </Router>
