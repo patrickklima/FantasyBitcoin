@@ -25,11 +25,17 @@ class CoinIndexContainer extends Component {
   render() {
     const {coins} = this.props;
     const coinsMap = Object.keys(coins.index).map(coinSymbol => {
-      let thisCoin = coins[coinSymbol];
+      let thisCoin = coins.index[coinSymbol];
       return (
-        <tr>
+        <tr key={thisCoin.Name}>
           <th scope="row">{thisCoin.SortOrder}</th>
-          <td><img src={`${coins.rootImgUrl}/${thisCoin.ImageUrl}`} alt={thisCoin.Name}/></td>
+          <td>
+            <img 
+              src={`${coins.rootImgUrl}/${thisCoin.ImageUrl}`} 
+              alt={thisCoin.Name}
+              height={50}
+            />
+          </td>
           <td>{thisCoin.Name}</td>
           <td>{thisCoin.CoinName}</td>
        </tr>
