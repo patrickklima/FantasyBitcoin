@@ -4,6 +4,7 @@ import * as CoinActions from './actions/CoinActions';
 const initial = {
   coins: {
     index: {},
+    rootImgUrl: '',
     isFetching: false,
     error: null
   },
@@ -22,7 +23,8 @@ const coins = (state=initial.coins, action) => {
         ...state,
         isFetching: false,
         error: null,
-        index: action.data
+        rootImgUrl: action.data.BaseImageUrl,
+        index: action.data.Data
       };
     case CoinActions.GET_COIN_INDEX_FAILURE:
       return {
