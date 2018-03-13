@@ -70,7 +70,7 @@ class App extends Component {
             <Route exact path='/' component={Home}/>
             <Route path='/test' component={Test}/>
             <Route path='/portfolio' component={PortfolioContainer}/>
-            <Route path='/coins' component={TransactionsContainer}/>
+            <Route path='/coins' component={CoinIndexContainer}/>
             <Route path='/transactions' component={TransactionsContainer}/>
           </Switch>
         </div>
