@@ -17,13 +17,13 @@ class TransactionsContainer extends Component {
       <div>
         <h2>TransactionsContainer</h2>
       </div>
-    )
+    );
   }
 }
 
 TransactionsContainer.propTypes = {
 
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransactionsContainer);
 

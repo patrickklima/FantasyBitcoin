@@ -17,13 +17,13 @@ class CoinIndexContainer extends Component {
       <div>
         <h2>CoinIndexContainer</h2>
       </div>
-    )
+    );
   }
 }
 
 CoinIndexContainer.propTypes = {
 
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CoinIndexContainer);
 
