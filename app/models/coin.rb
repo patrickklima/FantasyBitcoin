@@ -1,7 +1,7 @@
 class Coin
   include Mongoid::Document
-  field :id, type NumberInt
+  field :id, type: Integer
   field :type, type: String
   field :symbol, type: String
-  field :marketCap, type: NumberInt
+  field :logo, type: Image
 end

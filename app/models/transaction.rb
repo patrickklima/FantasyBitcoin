@@ -1,10 +1,10 @@
 class Transaction
   include Mongoid::Document
-  field :id, type: NumberInt
-  field :userID, type: NumberInt
-  field :coinID, type: NumberInt
+  field :id, type: Integer
+  field :userID, type: Integer
+  field :coinID, type: Interger
   field :price, type: Decimal
-  field :quantity, type: NumberInt
+  field :quantity, type: Integer
   field :transBuy, type: Boolean
   field :date, type: Date
   field :transTotal, type: Decimal
