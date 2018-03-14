@@ -1,5 +1,6 @@
 class Transaction
   include Mongoid::Document
+  field :id, type: NumberInt
   field :userID, type: NumberInt
   field :coinID, type: NumberInt
   field :price, type: Decimal
