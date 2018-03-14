@@ -1,11 +1,10 @@
 class Transaction
   include Mongoid::Document
-  field :id, type: Integer
-  field :userID, type: Integer
-  field :coinID, type: Interger
+  has_one :user
+  field :type, type: Boolean
   field :price, type: Decimal
+  field :symFrom, type: String
+  field :symTo, type: String
   field :quantity, type: Integer
-  field :transBuy, type: Boolean
   field :date, type: Date
-  field :transTotal, type: Decimal
 end
