@@ -2,7 +2,7 @@ task :seed => :environment do
 # first delete all existing records
   NewsPost.all.delete
   Portfolio.all.delete
-  Stocks.all.delete
+  Stock.all.delete
   Transaction.all.delete
   User.all.delete
 
@@ -13,11 +13,13 @@ task :seed => :environment do
   syms = ["BTC", "ETH", "LTC", "BCH", "XRP", "NCASH", "BNB", "TRX", "ETC", "EOS", "NEO", "XEM", "DASH", "XMR", "VEN", "HT", "ICX", "XRB", "ADA", "IOST", "MCO", "ZEC", "WAVES", "OMG", "NBT", "ELF", "XLM", "IOT", "SUB", "QTUM" ]
   x = 0
   30.times do
-    Coin.create(name: coins[x],
-                sym: syms[x],
-                logo: Faker::Avatar.image("my-own-slug", "50x50") )
+    Stock.create(name: names[x],
+                symbol: syms[x],
+                logoURL: Faker::Avatar.image("my-own-slug", "50x50") )
     x += 1
   end
+
+  user = User.create(email: "user@example.com", password: "idNum")
 
 # 3 News Articles
   3.times do
@@ -27,29 +29,27 @@ task :seed => :environment do
 # 10 Portfolios
   x = 0
   10.times do
-    Portfolio.create(cash: Faker::Number.decimal(2),
+    Portfolio.create(cashInvested: Faker::Number.decimal(2),
                      profit: Faker::Number.decimal(1, 5),
-                     userID: x)
+                     user_id: user.id)
     x += 1
   end
 
 # 100 Transactions
   100.times do
-    Transaction.create(userID: Faker::Number.between(0, 9),
+    Transaction.create(user_id: user.id,
                        symFrom: syms[Faker::Number.between(0, 29)],
                        symTo: syms[Faker::Number.between(0, 29)],
                        price: Faker::Number.decimal(2, 5),
                        quantity: Faker::Number.digit,
-                       transBuy: Faker::Boolean.boolean,
-                       date: Faker::Date.backward(60),
+                       date: Faker::Date.backward(60))
   end
 
 # 10 Users
-  x = 0
-  10.times do
-    User.create(email: "user#{x}@example.com",
-                password: "#{x}idNum",
-                portID: x)
-  x += 1
-  end
+  # x = 0
+  # 10.times do
+  #   User.create(email: "user#{x}@example.com",
+  #               password: "#{x}idNum")
+  #   x += 1
+  # end
 end
