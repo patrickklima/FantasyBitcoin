@@ -10,13 +10,13 @@ task :seed => :environment do
 # 30 stocks
   names = ["Bitcoin", "Ethereum", "Litecoin", "bitcoin Cash", "Ripple", "Nucleus Vision", "Biance Coin", "Tronix", "Ethereum Classic", "EOS", "NEO", "NEM", "DigitalCash", "Monero", "Vechain", "Huobi Token", "ICON Project", "Nano", "Cardano", "IOS token", "Monaco", "ZCash", "Waves", "OmiseGo", "NuBits", "aelf", "Stellar", "IOTA", "Substratum Network", "QTUM"]
 
-  syms = ["BTC", "ETH", "LTC", "BCH", "XRP", "NCASH", "BNB", "TRX", "ETC", "EOS", "NEO", "XEM", "DASH", "XMR", "VEN", "HT", "ICX", "XRB", "ADA", "IOST", "MCO", "ZEC", "WAVES", "OMG", "NBT", "ELF", "XLM", "IOT", "SUB", "QTUM" ];
+  syms = ["BTC", "ETH", "LTC", "BCH", "XRP", "NCASH", "BNB", "TRX", "ETC", "EOS", "NEO", "XEM", "DASH", "XMR", "VEN", "HT", "ICX", "XRB", "ADA", "IOST", "MCO", "ZEC", "WAVES", "OMG", "NBT", "ELF", "XLM", "IOT", "SUB", "QTUM" ]
   x = 0
   30.times do
     Coin.create(name: coins[x],
                 sym: syms[x],
                 logo: Faker::Avatar.image("my-own-slug", "50x50") )
-    x +=1
+    x += 1
   end
 
 # 3 News Articles
@@ -50,6 +50,6 @@ task :seed => :environment do
     User.create(email: "user#{x}@example.com",
                 password: "#{x}idNum",
                 portID: x)
-  x +=1
+  x += 1
   end
 end
