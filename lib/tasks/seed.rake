@@ -3,7 +3,7 @@ namespace :db do
   # first delete all existing records
     NewsPost.all.delete
     Portfolio.all.delete
-    Stock.all.delete
+    Coin.all.delete
     Transaction.all.delete
     User.all.delete
 
@@ -14,7 +14,7 @@ namespace :db do
     syms = ["BTC", "ETH", "LTC", "BCH", "XRP", "NCASH", "BNB", "TRX", "ETC", "EOS", "NEO", "XEM", "DASH", "XMR", "VEN", "HT", "ICX", "XRB", "ADA", "IOST", "MCO", "ZEC", "WAVES", "OMG", "NBT", "ELF", "XLM", "IOT", "SUB", "QTUM" ]
     x = 0
     30.times do
-      Stock.create(name: names[x],
+      Coin.create(name: names[x],
                   symbol: syms[x],
                   logoURL: Faker::Avatar.image("my-own-slug", "50x50") )
       x += 1
