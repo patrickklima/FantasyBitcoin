@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withStyles } from 'material-ui/styles';
 import { getCoinIndex } from '../actions/CoinActions';
-import { Table } from 'reactstrap';
+import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+import Paper from 'material-ui/Paper';
 
 
 const mapStateToProps = (state) => {
@@ -17,13 +19,24 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
+const styles = theme => ({
+  root: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: 'auto',
+  },
+  table: {
+    minWidth: 700,
+  },
+});
+
 class CoinIndexContainer extends Component {
   componentDidMount() {
     this.props.getCoinIndex();
   }
   
   render() {
-    const {coins} = this.props;
+    const {coins, classes} = this.props;
     const coinsMap = Object.keys(coins.index).map(coinSymbol => {
       let thisCoin = coins.index[coinSymbol];
       return (
@@ -43,40 +56,36 @@ class CoinIndexContainer extends Component {
       );
     });
     const coinsTable = 
-      <Table
-        size={'sm'}
-        bordered={true}
-        striped={true} 
-        dark={false} 
-        hover={true} 
-        responsive={true}
-      >
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Logo</th>
-            <th>Symbol</th>
-            <th>Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          {coinsMap}
-        </tbody>
+      <Table className={classes.table}>
+        <TableHead>
+          <TableRow>
+            <TableCell>#</TableCell>
+            <TableCell>Logo</TableCell>
+            <TableCell>Symbol</TableCell>
+            <TableCell>Name</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+        {coinsMap}
+        </TableBody>
       </Table>;
     return (
-      <div>
+      <Paper className={classes.root}>
         {coins.isFetching 
           ? <p>Loading...</p> 
           : coinsTable}
-      </div>
+      </Paper>
     );
   }
 }
 
 CoinIndexContainer.propTypes = {
-
+  classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CoinIndexContainer);
+CoinIndexContainer = withStyles(styles, { withTheme: true })(CoinIndexContainer);
+CoinIndexContainer = connect(mapStateToProps, mapDispatchToProps)(CoinIndexContainer);
+
+export default CoinIndexContainer;
 
 
