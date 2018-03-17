@@ -27,6 +27,7 @@ const styles = theme => ({
   },
   table: {
     minWidth: 700,
+    logoImgHeight: 40
   },
 });
 
@@ -40,18 +41,18 @@ class CoinIndexContainer extends Component {
     const coinsMap = Object.keys(coins.index).map(coinSymbol => {
       let thisCoin = coins.index[coinSymbol];
       return (
-        <tr key={thisCoin.Name}>
+        <TableRow  key={thisCoin.Name}>
           <th scope="row">{thisCoin.SortOrder}</th>
-          <td>
+          <TableCell>
             <img 
               src={`${coins.rootImgUrl}/${thisCoin.ImageUrl}`} 
               alt={thisCoin.Name}
-              height={50}
+              height={40}
             />
-          </td>
-          <td>{thisCoin.Name}</td>
-          <td>{thisCoin.CoinName}</td>
-       </tr>
+          </TableCell>
+          <TableCell>{thisCoin.Name}</TableCell>
+          <TableCell>{thisCoin.CoinName}</TableCell>
+       </TableRow>
      
       );
     });
