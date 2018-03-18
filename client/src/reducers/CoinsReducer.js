@@ -3,6 +3,8 @@ import * as CoinActions from '../actions/CoinActions';
 const initial = {
   coins: {
     index: {},
+    currentPage: 1,
+    coinsPerPage: 10,
     rootImgUrl: '',
     isFetching: false,
     error: null
@@ -30,6 +32,16 @@ export const coinIndexReducer = (state=initial.coins, action) => {
         ...state,
         isFetching: false,
         error: action.data
+      };
+    case CoinActions.CHANGE_COINS_PER_PAGE:
+      return {
+        ...state,
+        coinsPerPage: action.data
+      };
+    case CoinActions.CHANGE_PAGE:
+      return {
+        ...state,
+        currentPage: action.data
       };
     default:
       return state;
