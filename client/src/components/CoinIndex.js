@@ -1,5 +1,7 @@
 import React from 'react';
-import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+import Table, 
+  { TableBody, TableCell, TableHead, TableRow, TableFooter, TablePagination } 
+    from 'material-ui/Table';
 import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
 
@@ -15,7 +17,16 @@ const styles = theme => ({
   },
 });
 
-let CoinIndex = ({coins, getCoinIndex, classes}) => {
+let CoinIndex = ({classes, coins, changeCoinsPerPage, changePage, }) => {
+  const header = 
+    <TableHead>
+      <TableRow>
+        <TableCell>#</TableCell>
+        <TableCell>Logo</TableCell>
+        <TableCell>Symbol</TableCell>
+        <TableCell>Name</TableCell>
+      </TableRow>
+    </TableHead>;
   const coinsMap = Object.keys(coins.index).map(coinSymbol => {
     let thisCoin = coins.index[coinSymbol];
     return (
@@ -34,19 +45,32 @@ let CoinIndex = ({coins, getCoinIndex, classes}) => {
    
     );
   });
+  const pagination = 
+  <TableFooter>
+    <TableRow>
+      <TablePagination
+        colSpan={6}
+        count={coinsMap.length}
+        rowsPerPage={coins.coinsPerPage}
+        page={coins.currentPage}
+        backIconButtonProps={{
+          'aria-label': 'Previous Page',
+        }}
+        nextIconButtonProps={{
+          'aria-label': 'Next Page',
+        }}
+        onChangePage={changePage}
+        onChangeRowsPerPage={changeCoinsPerPage}
+      />
+    </TableRow>
+  </TableFooter>;
   const coinsTable = 
     <Table className={classes.table}>
-      <TableHead>
-        <TableRow>
-          <TableCell>#</TableCell>
-          <TableCell>Logo</TableCell>
-          <TableCell>Symbol</TableCell>
-          <TableCell>Name</TableCell>
-        </TableRow>
-      </TableHead>
+      {header}
       <TableBody>
-      {coinsMap}
+        {coinsMap}
       </TableBody>
+        {pagination}
     </Table>;
   return (
     <Paper className={classes.root}>
