@@ -1,5 +1,4 @@
-import {combineReducers} from 'redux';
-import * as CoinActions from './actions/CoinActions';
+import * as CoinActions from '../actions/CoinActions';
 
 const initial = {
   coins: {
@@ -10,7 +9,7 @@ const initial = {
   },
 };
 
-const coins = (state=initial.coins, action) => {
+export const coinIndexReducer = (state=initial.coins, action) => {
   switch (action.type) {
     case CoinActions.GET_COIN_INDEX_REQUEST:
       return {
@@ -36,5 +35,3 @@ const coins = (state=initial.coins, action) => {
       return state;
   }
 };
-
-export default combineReducers({coins});
