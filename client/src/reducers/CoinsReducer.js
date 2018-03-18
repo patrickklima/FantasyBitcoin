@@ -81,7 +81,6 @@ export const coins = (state=initial.coins, action) => {
         currentPage: action.data,
         symbolsOnDisplay: filterSymbolsOnDisplay(state.index, action.data, state.coinsPerPage)
       };
-    
     default:
       return state;
   }

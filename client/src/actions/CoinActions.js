@@ -102,4 +102,3 @@ export const changePage = (data) => {
     data: data
   };
 };
-
