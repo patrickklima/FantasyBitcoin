@@ -27,11 +27,11 @@ let CoinIndex = ({classes, coins, changeCoinsPerPage, changePage, }) => {
         <TableCell>Name</TableCell>
       </TableRow>
     </TableHead>;
-  const coinsMap = Object.keys(coins.index).map(coinSymbol => {
-    let thisCoin = coins.index[coinSymbol];
+  const coinsMap = coins.symbolsOnDisplay.map(symbol => {
+    let thisCoin = coins.index[symbol];
     return (
       <TableRow  key={thisCoin.Name}>
-        <th scope="row">{thisCoin.SortOrder}</th>
+        <TableCell>{thisCoin.SortOrder}</TableCell>
         <TableCell>
           <img 
             src={`${coins.rootImgUrl}/${thisCoin.ImageUrl}`} 
@@ -42,7 +42,6 @@ let CoinIndex = ({classes, coins, changeCoinsPerPage, changePage, }) => {
         <TableCell>{thisCoin.Name}</TableCell>
         <TableCell>{thisCoin.CoinName}</TableCell>
      </TableRow>
-   
     );
   });
   const pagination = 
@@ -50,9 +49,9 @@ let CoinIndex = ({classes, coins, changeCoinsPerPage, changePage, }) => {
     <TableRow>
       <TablePagination
         colSpan={6}
-        count={coinsMap.length}
+        count={Object.keys(coins.index).length}
         rowsPerPage={coins.coinsPerPage}
-        page={coins.currentPage}
+        page={coins.currentPage-1}
         backIconButtonProps={{
           'aria-label': 'Previous Page',
         }}
@@ -61,6 +60,7 @@ let CoinIndex = ({classes, coins, changeCoinsPerPage, changePage, }) => {
         }}
         onChangePage={changePage}
         onChangeRowsPerPage={changeCoinsPerPage}
+        rowsPerPageOptions={[10,25,50]}
       />
     </TableRow>
   </TableFooter>;
