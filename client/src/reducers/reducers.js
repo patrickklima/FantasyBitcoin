@@ -1,4 +1,4 @@
 import {combineReducers} from 'redux';
-import {coinIndexReducer} from './CoinsReducer';
+import {coins} from './CoinsReducer';
 
-export default combineReducers({coinIndexReducer});
+export default combineReducers({coins});

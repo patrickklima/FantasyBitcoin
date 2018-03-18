@@ -9,7 +9,7 @@ const initial = {
   },
 };
 
-export const coinIndexReducer = (state=initial.coins, action) => {
+export const coins = (state=initial.coins, action) => {
   switch (action.type) {
     case CoinActions.GET_COIN_INDEX_REQUEST:
       return {

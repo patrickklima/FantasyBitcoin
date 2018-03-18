@@ -1,7 +1,7 @@
 import reduxTdd from 'redux-tdd';
 import CoinIndex from '../components/CoinIndex';
 import * as CoinActions from '../actions/CoinActions';
-import {coinIndexReducer} from '../reducers/CoinsReducer';
+import {coins} from '../reducers/CoinsReducer';
 import Enzyme, {shallow} from 'enzyme';
 import React, {Component} from 'react';
 import Adapter from 'enzyme-adapter-react-16';
@@ -18,7 +18,7 @@ const initial = {
   },
 };
 
-reduxTdd({coinIndexReducer}, (state) => shallow(
+reduxTdd({coins}, (state) => shallow(
     <CoinIndex 
       coins={state.coins}
       getCoinIndex={CoinActions.getCoinIndex}
