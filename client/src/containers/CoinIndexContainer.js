@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getCoinIndex, changeCoinsPerPage, changePage } from '../actions/CoinActions';
+import { getCoinIndexData, changeCoinsPerPage, changePage } from '../actions/CoinActions';
 import CoinIndex from '../components/CoinIndex';
 
 
@@ -13,9 +13,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCoinIndex: () => dispatch(getCoinIndex()),
-    changeCoinsPerPage: (e) => dispatch(changeCoinsPerPage(e.target.value)),
-    changePage: (e) => dispatch(changePage(e.target.value)),
+    getCoinIndexData: (symbolsOnDisplay, govDisplayCurrency, cryptoDisplayCurrency) => {
+      return dispatch(
+        getCoinIndexData(symbolsOnDisplay, govDisplayCurrency, cryptoDisplayCurrency)
+      );
+    },
+    changeCoinsPerPage: (event) => dispatch(changeCoinsPerPage(event.target.value)),
+    changePage: (event, page) => dispatch(changePage(page+1)),
   };
 };
 
@@ -27,7 +31,10 @@ class CoinIndexContainer extends Component {
   }
 
   componentDidMount() {
-    this.props.getCoinIndex();
+    const {getCoinIndexData, coins: 
+      {symbolsOnDisplay, govDisplayCurrency, cryptoDisplayCurrency}
+    } = this.props;
+    getCoinIndexData(symbolsOnDisplay, govDisplayCurrency, cryptoDisplayCurrency);
   }
   
   render() {
