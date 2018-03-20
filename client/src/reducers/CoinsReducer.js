@@ -21,7 +21,7 @@ const filterSymbolsOnDisplay = (coinIndex, currentPage, coinsPerPage) => {
   return Object.keys(coinIndex)
     .filter(symbol => {
       return (
-        +thisCoin(symbol).SortOrder > startIndex 
+        +thisCoin(symbol).SortOrder > startIndex
         &&
         +thisCoin(symbol).SortOrder <= endIndex
       );
@@ -34,9 +34,9 @@ const spreadIndexData = (coinIndex, newIndexData) => {
     return coinIndex[coinSymbol] = {
       ...coinIndex[coinSymbol],
       ...newIndexData[coinSymbol]
-    }
+    };
   }, coinIndex);
-}
+};
 export const coins = (state=initial.coins, action) => {
   switch (action.type) {
     case CoinActions.GET_COIN_INDEX_REQUEST:
@@ -72,7 +72,7 @@ export const coins = (state=initial.coins, action) => {
     case CoinActions.CHANGE_COINS_PER_PAGE:
       return {
         ...state,
-        coinsPerPage: action.data, 
+        coinsPerPage: action.data,
         symbolsOnDisplay: filterSymbolsOnDisplay(state.index, state.currentPage, action.data)
       };
     case CoinActions.CHANGE_PAGE:
