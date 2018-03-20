@@ -10,7 +10,7 @@ export const CHANGE_COINS_PER_PAGE = "CHANGE_COINS_PER_PAGE";
 export const CHANGE_PAGE = "CHANGE_PAGE";
 
 const apiCoinIndexUrl = 'https://min-api.cryptocompare.com/data/all/coinlist';
-const apiCoinIndexDataUrl = 'http://localhost:3001';
+const apiCoinIndexDataUrl = '/coins';
 
 const handleGetCall = (getUrl, requestFunc, successFunc, failFunc) => {
   return (dispatch) => {

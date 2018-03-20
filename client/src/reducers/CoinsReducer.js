@@ -30,11 +30,12 @@ const filterSymbolsOnDisplay = (coinIndex, currentPage, coinsPerPage) => {
 };
 
 const spreadIndexData = (coinIndex, newIndexData) => {
-  return Object.keys(newIndexData).reduce((coinIndex, coinSymbol) => {
-    return coinIndex[coinSymbol] = {
+  return Object.keys(newIndexData.coins).reduce((coinIndex, coinSymbol) => {
+    coinIndex[coinSymbol] = {
       ...coinIndex[coinSymbol],
-      ...newIndexData[coinSymbol]
+      ...newIndexData.coins[coinSymbol]
     }
+    return coinIndex;
   }, coinIndex);
 }
 export const coins = (state=initial.coins, action) => {
@@ -60,7 +61,7 @@ export const coins = (state=initial.coins, action) => {
         ...state,
         isFetching: false,
         error: null,
-        index: spreadIndexData(state.index, action.data.coins)
+        index: spreadIndexData(state.index, action.data)
       };
     case CoinActions.GET_COIN_INDEX_FAILURE:
     case CoinActions.GET_COIN_INDEX_DATA_FAILURE:
