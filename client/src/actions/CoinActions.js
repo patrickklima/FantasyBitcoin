@@ -1,3 +1,4 @@
+import handleApiCall from '../services/handle-api-call-service';
 export const GET_COIN_INDEX_REQUEST = "GET_COIN_INDEX_REQUEST";
 export const GET_COIN_INDEX_SUCCESS = "GET_COIN_INDEX_SUCCESS";
 export const GET_COIN_INDEX_FAILURE = "GET_COIN_INDEX_FAILURE";
@@ -12,27 +13,6 @@ export const CHANGE_PAGE = "CHANGE_PAGE";
 const apiCoinIndexUrl = 'https://min-api.cryptocompare.com/data/all/coinlist';
 const apiCoinIndexDataUrl = '/coins';
 
-const handleGetCall = (getUrl, requestFunc, successFunc, failFunc) => {
-  return (dispatch) => {
-    dispatch(requestFunc());
-    return fetch(getUrl, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      cors: true
-    })
-    .then(res => {
-      if (!res.ok) {
-        throw new Error(`${res.statusText}: ${res.error}`);
-      }
-      return res.json();
-    })
-    .then(json => dispatch(successFunc(json)))
-    .catch(error => dispatch(failFunc(error)));
-  };
-};
 
 export const getCoinIndexThenData = () => {
   return async (dispatch, getState) => {
@@ -45,6 +25,7 @@ export const getCoinIndexThenData = () => {
 export const getCoinIndex = () => {
   return handleGetCall(
     apiCoinIndexUrl,
+    'GET',
     getCoinIndexRequest,
     getCoinIndexSuccess,
     getCoinIndexFailure
@@ -56,6 +37,7 @@ export const getCoinIndexData = (symbolsOnDisplay, govDisplayCurrency, cryptoDis
   const tsyms = [govDisplayCurrency, cryptoDisplayCurrency].toString();
   return handleGetCall(
     `${apiCoinIndexDataUrl}/?fsyms=${fsyms}&tsyms=${tsyms}`,
+    'GET',
     getCoinIndexDataRequest,
     getCoinIndexDataSuccess,
     getCoinIndexDataFailure
