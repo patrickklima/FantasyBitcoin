@@ -5,7 +5,6 @@ const handleApiCall = (requestUrl, httpMethod, bodyData, requestFunc, successFun
     fetchInit = {
       ...fetchInit,
       method: httpMethod, 
-      // credentials: 'include',
       mode: 'cors',
       headers: new Headers({
         'Content-Type': 'application/json'

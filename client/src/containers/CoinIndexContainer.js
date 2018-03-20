@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCoinIndex, getCoinIndexData, getCoinIndexThenData, changeCoinsPerPage, changePage } from '../actions/CoinActions';
+import filterSymbolsOnDisplay from '../services/filterSymbolsOnDisplayService';
 import CoinIndex from '../components/CoinIndex';
 
 
@@ -28,12 +29,17 @@ const mapDispatchToProps = (dispatch, getState) => {
 class CoinIndexContainer extends Component {
   componentDidMount() {
     const {
-      symbolsOnDisplay, 
-      govDisplayCurrency, 
-      cryptoDisplayCurrency, 
+      coins: {
+        index,
+        currentPage, 
+        coinsPerPage,
+        govDisplayCurrency, 
+        cryptoDisplayCurrency,
+      },
       getCoinIndexThenData, 
       getCoinIndexData
     } = this.props;
+    const symbolsOnDisplay = filterSymbolsOnDisplay(index, currentPage, coinsPerPage);
     if (!symbolsOnDisplay || symbolsOnDisplay.length === 0) {
       this.props.getCoinIndexThenData();
     } else {

@@ -4,6 +4,7 @@ import Table,
     from 'material-ui/Table';
 import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
+import filterSymbolsOnDisplay from '../services/filterSymbolsOnDisplayService';
 
 const styles = theme => ({
   root: {
@@ -18,6 +19,7 @@ const styles = theme => ({
 });
 
 let CoinIndex = ({classes, coins, changeCoinsPerPage, changePage, }) => {
+  const {index, currentPage, coinsPerPage, rootImgUrl, isFetching} = coins;
   const header = 
     <TableHead>
       <TableRow>
@@ -27,14 +29,15 @@ let CoinIndex = ({classes, coins, changeCoinsPerPage, changePage, }) => {
         <TableCell>Name</TableCell>
       </TableRow>
     </TableHead>;
-  const coinsMap = coins.symbolsOnDisplay.map(symbol => {
-    let thisCoin = coins.index[symbol];
+  const symbolsOnDisplay = filterSymbolsOnDisplay(index, currentPage, coinsPerPage);
+  const coinsMap = symbolsOnDisplay.map(symbol => {
+    let thisCoin = index[symbol];
     return (
       <TableRow  key={thisCoin.Name}>
         <TableCell>{thisCoin.SortOrder}</TableCell>
         <TableCell>
           <img 
-            src={`${coins.rootImgUrl}/${thisCoin.ImageUrl}`} 
+            src={`${rootImgUrl}/${thisCoin.ImageUrl}`} 
             alt={thisCoin.Name}
             height={40}
           />
@@ -49,9 +52,9 @@ let CoinIndex = ({classes, coins, changeCoinsPerPage, changePage, }) => {
     <TableRow>
       <TablePagination
         colSpan={6}
-        count={Object.keys(coins.index).length}
-        rowsPerPage={coins.coinsPerPage}
-        page={coins.currentPage-1}
+        count={Object.keys(index).length}
+        rowsPerPage={coinsPerPage}
+        page={currentPage-1}
         backIconButtonProps={{
           'aria-label': 'Previous Page',
         }}
@@ -74,7 +77,7 @@ let CoinIndex = ({classes, coins, changeCoinsPerPage, changePage, }) => {
     </Table>;
   return (
     <Paper className={classes.root}>
-      {coins.isFetching 
+      {isFetching 
         ? <p>Loading...</p> 
         : coinsTable}
     </Paper>
