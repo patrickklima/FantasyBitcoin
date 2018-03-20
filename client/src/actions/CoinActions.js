@@ -15,7 +15,7 @@ const apiCoinIndexDataUrl = 'http://localhost:3001';
 const handleGetCall = (getUrl, requestFunc, successFunc, failFunc) => {
   return (dispatch) => {
     dispatch(requestFunc());
-    fetch(getUrl, {
+    return fetch(getUrl, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -31,6 +31,14 @@ const handleGetCall = (getUrl, requestFunc, successFunc, failFunc) => {
     })
     .then(json => dispatch(successFunc(json)))
     .catch(error => dispatch(failFunc(error)));
+  };
+};
+
+export const getCoinIndexThenData = () => {
+  return async (dispatch, getState) => {
+    await dispatch(getCoinIndex());
+    const {symbolsOnDisplay, govDisplayCurrency, cryptoDisplayCurrency} = getState().coins;
+    dispatch(getCoinIndexData(symbolsOnDisplay, govDisplayCurrency, cryptoDisplayCurrency));
   };
 };
 

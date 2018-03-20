@@ -31,7 +31,7 @@ const filterSymbolsOnDisplay = (coinIndex, currentPage, coinsPerPage) => {
 
 const spreadIndexData = (coinIndex, newIndexData) => {
   return Object.keys(newIndexData).reduce((coinIndex, coinSymbol) => {
-    coinIndex[coinSymbol] = {
+    return coinIndex[coinSymbol] = {
       ...coinIndex[coinSymbol],
       ...newIndexData[coinSymbol]
     }
