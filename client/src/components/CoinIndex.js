@@ -1,6 +1,6 @@
 import React from 'react';
-import Table,
-  { TableBody, TableCell, TableHead, TableRow, TableFooter, TablePagination }
+import Table, 
+  { TableBody, TableCell, TableHead, TableRow, TableFooter, TablePagination } 
     from 'material-ui/Table';
 import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
@@ -18,7 +18,7 @@ const styles = theme => ({
 });
 
 let CoinIndex = ({classes, coins, changeCoinsPerPage, changePage, }) => {
-  const header =
+  const header = 
     <TableHead>
       <TableRow>
         <TableCell>#</TableCell>
@@ -28,26 +28,23 @@ let CoinIndex = ({classes, coins, changeCoinsPerPage, changePage, }) => {
       </TableRow>
     </TableHead>;
   const coinsMap = coins.symbolsOnDisplay.map(symbol => {
-    if (coins.index[symbol]) {
-      let thisCoin = coins.index[symbol];
-      return (
-        <TableRow  key={thisCoin.Name}>
-          <TableCell>{thisCoin.SortOrder}</TableCell>
-          <TableCell>
-            <img
-              src={`${coins.rootImgUrl}/${thisCoin.ImageUrl}`}
-              alt={thisCoin.Name}
-              height={40}
-            />
-          </TableCell>
-          <TableCell>{thisCoin.Name}</TableCell>
-          <TableCell>{thisCoin.CoinName}</TableCell>
-       </TableRow>
-      );
-    }
-
+    let thisCoin = coins.index[symbol];
+    return (
+      <TableRow  key={thisCoin.Name}>
+        <TableCell>{thisCoin.SortOrder}</TableCell>
+        <TableCell>
+          <img 
+            src={`${coins.rootImgUrl}/${thisCoin.ImageUrl}`} 
+            alt={thisCoin.Name}
+            height={40}
+          />
+        </TableCell>
+        <TableCell>{thisCoin.Name}</TableCell>
+        <TableCell>{thisCoin.CoinName}</TableCell>
+     </TableRow>
+    );
   });
-  const pagination =
+  const pagination = 
   <TableFooter>
     <TableRow>
       <TablePagination
@@ -67,7 +64,7 @@ let CoinIndex = ({classes, coins, changeCoinsPerPage, changePage, }) => {
       />
     </TableRow>
   </TableFooter>;
-  const coinsTable =
+  const coinsTable = 
     <Table className={classes.table}>
       {header}
       <TableBody>
@@ -77,13 +74,14 @@ let CoinIndex = ({classes, coins, changeCoinsPerPage, changePage, }) => {
     </Table>;
   return (
     <Paper className={classes.root}>
-      {coins.isFetching
-        ? <p>Loading...</p>
+      {coins.isFetching 
+        ? <p>Loading...</p> 
         : coinsTable}
     </Paper>
   );
-};
+}
 
 CoinIndex = withStyles(styles, { withTheme: true })(CoinIndex);
+
 
 export default CoinIndex;

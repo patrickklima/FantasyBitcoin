@@ -10,6 +10,7 @@ export const CHANGE_COINS_PER_PAGE = "CHANGE_COINS_PER_PAGE";
 export const CHANGE_PAGE = "CHANGE_PAGE";
 
 const apiCoinIndexUrl = 'https://min-api.cryptocompare.com/data/all/coinlist';
+const apiCoinIndexDataUrl = 'http://localhost:3001';
 
 const handleGetCall = (getUrl, requestFunc, successFunc, failFunc) => {
   return (dispatch) => {
@@ -22,14 +23,14 @@ const handleGetCall = (getUrl, requestFunc, successFunc, failFunc) => {
       },
       cors: true
     })
-      .then(res => {
-        if (!res.ok) {
-          throw new Error(`${res.statusText}: ${res.error}`);
-        }
-        return res.json();
-      })
-      .then(json => dispatch(successFunc(json)))
-      .catch(error => dispatch(failFunc(error)));
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(`${res.statusText}: ${res.error}`);
+      }
+      return res.json();
+    })
+    .then(json => dispatch(successFunc(json)))
+    .catch(error => dispatch(failFunc(error)));
   };
 };
 
@@ -54,7 +55,7 @@ export const getCoinIndexData = (symbolsOnDisplay, govDisplayCurrency, cryptoDis
   const fsyms = symbolsOnDisplay.toString();
   const tsyms = [govDisplayCurrency, cryptoDisplayCurrency].toString();
   return handleGetCall(
-    `/coins/?fsyms=${fsyms}&tsyms=${tsyms}`,
+    `${apiCoinIndexDataUrl}/?fsyms=${fsyms}&tsyms=${tsyms}`,
     getCoinIndexDataRequest,
     getCoinIndexDataSuccess,
     getCoinIndexDataFailure
