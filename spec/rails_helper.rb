@@ -30,5 +30,7 @@ RSpec.configure do |config|
 
   config.after(:each) do
     DatabaseCleaner.clean
+
+  config.include FactoryGirl::Syntax::Methods
   end
 end
