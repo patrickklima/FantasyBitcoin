@@ -30,7 +30,7 @@ class CoinIndexContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayCurrency:''
+      displayCurrency: props.coins.govDisplayCurrency
     };
   }
   componentDidMount() {

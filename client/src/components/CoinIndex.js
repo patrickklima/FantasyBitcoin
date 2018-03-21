@@ -37,6 +37,7 @@ let CoinIndex = ({classes, coins, changeCoinsPerPage, changePage, displayCurrenc
   const coinsMap = symbolsOnDisplay.map(symbol => {
     let thisCoin = index[symbol];
     let thisCoinData = thisCoin[displayCurrency];
+    if (thisCoinData) console.log("thisCoinData.marketCap", isNaN(thisCoinData.marketCap));
     return (
       <TableRow  key={thisCoin.Name}>
         <TableCell>{thisCoin.Name}</TableCell>
@@ -48,8 +49,12 @@ let CoinIndex = ({classes, coins, changeCoinsPerPage, changePage, displayCurrenc
           />
         </TableCell>
         <TableCell>{thisCoin.CoinName}</TableCell>
-        <TableCell>{thisCoinData ? thisCoinData.price : 'Loading...'}</TableCell>
-        <TableCell>{thisCoinData ? thisCoinData.marketCap : 'Loading...'}</TableCell>
+        <TableCell>
+          {thisCoinData ? thisCoinData.price : <em>Choose a currency</em>}
+        </TableCell>
+        <TableCell>
+          {thisCoinData ? +(thisCoinData.marketCap).toFixed(2) : <em>Choose a currency</em>}
+        </TableCell>
      </TableRow>
     );
   });
