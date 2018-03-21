@@ -27,6 +27,12 @@ const mapDispatchToProps = (dispatch, getState) => {
 };
 
 class CoinIndexContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      displayCurrency:''
+    };
+  }
   componentDidMount() {
     const {
       coins: {
@@ -46,7 +52,13 @@ class CoinIndexContainer extends Component {
       getCoinIndexData(symbolsOnDisplay, govDisplayCurrency, cryptoDisplayCurrency);
     }
   }
-  
+  onDisplayCurrencyChange = (event) => {
+    this.setState({
+      ...this.state,
+      displayCurrency: event.target.value
+    })
+  }
+
   render() {
     const {coins, changeCoinsPerPage, changePage} = this.props;
     console.log(this.props);
@@ -55,6 +67,8 @@ class CoinIndexContainer extends Component {
         coins={coins}
         changeCoinsPerPage={changeCoinsPerPage}
         changePage={changePage}
+        displayCurrency={this.state.displayCurrency}
+        onDisplayCurrencyChange={this.onDisplayCurrencyChange}
       />
       );
     

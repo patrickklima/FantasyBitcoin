@@ -4,6 +4,7 @@ import Table,
     from 'material-ui/Table';
 import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
+import DisplayCurrencySelect from './DisplayCurrencySelect';
 import filterSymbolsOnDisplay from '../services/filterSymbolsOnDisplayService';
 
 const styles = theme => ({
@@ -13,28 +14,32 @@ const styles = theme => ({
     overflowX: 'auto',
   },
   table: {
-    minWidth: 700,
-    logoImgHeight: 40
+    minWidth: '100%',
+    logoImgHeight: 40,
+    fontSize: 18
+
   },
 });
 
-let CoinIndex = ({classes, coins, changeCoinsPerPage, changePage, }) => {
-  const {index, currentPage, coinsPerPage, rootImgUrl, isFetching} = coins;
+let CoinIndex = ({classes, coins, changeCoinsPerPage, changePage, displayCurrency, onDisplayCurrencyChange, }) => {
+  const {index, govDisplayCurrency, cryptoDisplayCurrency, currentPage, coinsPerPage, rootImgUrl, isFetching} = coins;
   const header = 
     <TableHead>
       <TableRow>
-        <TableCell>#</TableCell>
-        <TableCell>Logo</TableCell>
         <TableCell>Symbol</TableCell>
+        <TableCell>Logo</TableCell>
         <TableCell>Name</TableCell>
+        <TableCell>Price</TableCell>
+        <TableCell>Market Cap</TableCell>
       </TableRow>
     </TableHead>;
   const symbolsOnDisplay = filterSymbolsOnDisplay(index, currentPage, coinsPerPage);
   const coinsMap = symbolsOnDisplay.map(symbol => {
     let thisCoin = index[symbol];
+    let thisCoinData = thisCoin[displayCurrency];
     return (
       <TableRow  key={thisCoin.Name}>
-        <TableCell>{thisCoin.SortOrder}</TableCell>
+        <TableCell>{thisCoin.Name}</TableCell>
         <TableCell>
           <img 
             src={`${rootImgUrl}/${thisCoin.ImageUrl}`} 
@@ -42,8 +47,9 @@ let CoinIndex = ({classes, coins, changeCoinsPerPage, changePage, }) => {
             height={40}
           />
         </TableCell>
-        <TableCell>{thisCoin.Name}</TableCell>
         <TableCell>{thisCoin.CoinName}</TableCell>
+        <TableCell>{thisCoinData ? thisCoinData.price : 'Loading...'}</TableCell>
+        <TableCell>{thisCoinData ? thisCoinData.marketCap : 'Loading...'}</TableCell>
      </TableRow>
     );
   });
@@ -77,6 +83,13 @@ let CoinIndex = ({classes, coins, changeCoinsPerPage, changePage, }) => {
     </Table>;
   return (
     <Paper className={classes.root}>
+      <DisplayCurrencySelect  
+        className={classes.select}
+        displayCurrency={displayCurrency}
+        onDisplayCurrencyChange={onDisplayCurrencyChange}
+        govDisplayCurrency={govDisplayCurrency}
+        cryptoDisplayCurrency={cryptoDisplayCurrency}
+      />
       {isFetching 
         ? <p>Loading...</p> 
         : coinsTable}
