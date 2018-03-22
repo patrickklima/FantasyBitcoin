@@ -34,6 +34,17 @@ class CoinIndexContainer extends Component {
     };
   }
   componentDidMount() {
+    this.getDataAsNeeded();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      prevProps.coins.currentPage !== this.props.coins.currentPage || 
+      prevProps.coins.coinsPerPage !== this.props.coins.coinsPerPage
+    ) {
+      this.getDataAsNeeded();
+    }
+  }
+  getDataAsNeeded = () => {
     const {
       coins: {
         index,
