@@ -22,6 +22,12 @@ class CoinsController < ApplicationController
         client_response["coins"][sym]["BTC"] = {}
         client_response["coins"][sym]["USD"]["marketCap"] = api_data["RAW"][sym]["USD"]["MKTCAP"]
         client_response["coins"][sym]["BTC"]["marketCap"] = api_data["RAW"][sym]["BTC"]["MKTCAP"]
+        client_response["coins"][sym]["USD"]["supply"] = api_data["RAW"][sym]["USD"]["SUPPLY"]
+        client_response["coins"][sym]["BTC"]["supply"] = api_data["RAW"][sym]["BTC"]["SUPPLY"]
+        client_response["coins"][sym]["USD"]["24HrVolume"] = api_data["RAW"][sym]["USD"]["TOTALVOLUME24HTO"]
+        client_response["coins"][sym]["BTC"]["24HrVolume"] = api_data["RAW"][sym]["BTC"]["TOTALVOLUME24HTO"]
+        client_response["coins"][sym]["USD"]["24HrPctPrice"] = api_data["RAW"][sym]["USD"]["CHANGEPCT24HOUR"]
+        client_response["coins"][sym]["BTC"]["24HrPctPrice"] = api_data["RAW"][sym]["BTC"]["CHANGEPCT24HOUR"]
         client_response["coins"][sym]["USD"]["price"] = api_data["RAW"][sym]["USD"]["PRICE"]
         client_response["coins"][sym]["BTC"]["price"] = api_data["RAW"][sym]["BTC"]["PRICE"]
       end

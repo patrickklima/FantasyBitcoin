@@ -19,6 +19,13 @@ describe CoinsController do
       expect(body["coins"]["DOGE"].class).to eq(Hash)
     end
 
+    # it "returns the sort order for each coin" do
+    #   get :index, params: { fsyms: "ETH,DOGE" }
+    #   body = JSON.parse response.body
+    #   expect(body["coins"]["ETH"]["SortOrder"]).to eq("2")
+    #   expect(body["coins"]["DOGE"]["SortOrder"]).to eq("32")
+    # end
+
     it "returns the marketcap for each coin" do
       get :index, params: { fsyms: "ETH,DOGE" }
       body = JSON.parse response.body
@@ -26,6 +33,33 @@ describe CoinsController do
       expect(body["coins"]["ETH"]["BTC"]["marketCap"]).to be_present
       expect(body["coins"]["DOGE"]["USD"]["marketCap"]).to be_present
       expect(body["coins"]["DOGE"]["BTC"]["marketCap"]).to be_present
+    end
+
+    it "returns the supply for each coin" do
+      get :index, params: { fsyms: "ETH,DOGE" }
+      body = JSON.parse response.body
+      expect(body["coins"]["ETH"]["USD"]["supply"]).to be_present
+      expect(body["coins"]["ETH"]["BTC"]["supply"]).to be_present
+      expect(body["coins"]["DOGE"]["USD"]["supply"]).to be_present
+      expect(body["coins"]["DOGE"]["BTC"]["supply"]).to be_present
+    end
+
+    it "returns the 24HrVolume for each coin" do
+      get :index, params: { fsyms: "ETH,DOGE" }
+      body = JSON.parse response.body
+      expect(body["coins"]["ETH"]["USD"]["24HrVolume"]).to be_present
+      expect(body["coins"]["ETH"]["BTC"]["24HrVolume"]).to be_present
+      expect(body["coins"]["DOGE"]["USD"]["24HrVolume"]).to be_present
+      expect(body["coins"]["DOGE"]["BTC"]["24HrVolume"]).to be_present
+    end
+
+    it "returns the 24HrPctPrice for each coin" do
+      get :index, params: { fsyms: "ETH,DOGE" }
+      body = JSON.parse response.body
+      expect(body["coins"]["ETH"]["USD"]["24HrPctPrice"]).to be_present
+      expect(body["coins"]["ETH"]["BTC"]["24HrPctPrice"]).to be_present
+      expect(body["coins"]["DOGE"]["USD"]["24HrPctPrice"]).to be_present
+      expect(body["coins"]["DOGE"]["BTC"]["24HrPctPrice"]).to be_present
     end
 
     it "returns the price for each coin" do
