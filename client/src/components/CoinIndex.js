@@ -19,6 +19,9 @@ const styles = theme => ({
     fontSize: 18
 
   },
+  loadingMsg: {
+    fontSize: 13
+  }
 });
 
 let CoinIndex = ({classes, coins, changeCoinsPerPage, changePage, displayCurrency, onDisplayCurrencyChange, }) => {
@@ -81,7 +84,9 @@ let CoinIndex = ({classes, coins, changeCoinsPerPage, changePage, displayCurrenc
     <Table className={classes.table}>
       {header}
       <TableBody>
-        {coinsMap}
+      {isFetching 
+        ? <p className={classes.loadingMsg}>Loading...</p> 
+        : coinsMap}
       </TableBody>
       {pagination}
     </Table>;
@@ -94,9 +99,7 @@ let CoinIndex = ({classes, coins, changeCoinsPerPage, changePage, displayCurrenc
         govDisplayCurrency={govDisplayCurrency}
         cryptoDisplayCurrency={cryptoDisplayCurrency}
       />
-      {isFetching 
-        ? <p>Loading...</p> 
-        : coinsTable}
+      {coinsTable}
     </Paper>
   );
 }
