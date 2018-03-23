@@ -3,5 +3,7 @@ Rails.application.routes.draw do
 
   resources :coins, only: [:index]
 
+  get '/double_api_test', to: 'coins#double_api_test'
+
   get '/test_data', to: 'test#get'
 end
