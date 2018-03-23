@@ -3,11 +3,7 @@ class CoinsController < ApplicationController
     syms = params["fsyms"]
 
     if syms
-      url = URI.parse("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=#{syms}&tsyms=BTC,USD")
-      http = Net::HTTP.new(url.host, url.port)
-      http.use_ssl = true
-      request = Net::HTTP::Get.new(url.to_s)
-      response = http.request(request)
+      response = getApiResponse("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=#{syms}&tsyms=BTC,USD")
 
       api_data = JSON.parse response.read_body
 
@@ -35,5 +31,23 @@ class CoinsController < ApplicationController
 
 
     json_response(client_response || {})
+  end
+
+  def double_api_test
+    response1 = getApiResponse("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH&tsyms=BTC,USD")
+    response2 = getApiResponse("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=DOGE&tsyms=BTC,USD")
+
+    client_response = { response1: JSON.parse(response1.read_body), response2: JSON.parse(response2.read_body) }
+    json_response(client_response || {})
+  end
+
+  private
+
+  def getApiResponse(apiUrl)
+    url = URI.parse(apiUrl)
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    request = Net::HTTP::Get.new(url.to_s)
+    response = http.request(request)
   end
 end
