@@ -29,8 +29,6 @@ class CoinsController < ApplicationController
         client_response["coins"][sym]["CoinName"] = api_data1["Data"][sym]["CoinName"]
         client_response["coins"][sym]["ImageUrl"] = api_data1["Data"][sym]["ImageUrl"]
 
-
-
         client_response["coins"][sym]["USD"]["marketCap"] = api_data2["RAW"][sym]["USD"]["MKTCAP"]
         client_response["coins"][sym]["BTC"]["marketCap"] = api_data2["RAW"][sym]["BTC"]["MKTCAP"]
         client_response["coins"][sym]["USD"]["supply"] = api_data2["RAW"][sym]["USD"]["SUPPLY"]
@@ -46,11 +44,36 @@ class CoinsController < ApplicationController
     json_response(client_response || {})
   end
 
-  def double_api_test
-    response1 = getApiResponse("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH&tsyms=BTC,USD")
-    response2 = getApiResponse("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=DOGE&tsyms=BTC,USD")
+  def coin
+    fsym = params["fsym"]
+    tsym = params["tsym"]
+    fdate = params["fdate"].to_date
+    tdate = params["tdate"].to_date
+    limit = calcLimit(fdate)
+    time_arr = calcTime(fdate, tdate)
+    puts
 
-    client_response = { response1: JSON.parse(response1.read_body), response2: JSON.parse(response2.read_body) }
+    if (fsym && tsym && limit)
+      response = getApiResponse("https://min-api.cryptocompare.com/data/histoday?fsym=#{fsym}&tsym=#{tsym}&limit=#{limit}")
+
+      api_data = JSON.parse response.read_body
+
+      client_response = {}
+      client_response["tsym"] = {}
+      time_arr.each do |time|
+        client_response["tsym"][time] = {}
+        client_response["tsym"][time]["close"] = api_data["Data"][time]["close"]
+        client_response["tsym"][time]["time"] = api_data["Data"][time]["time"]
+        client_response["tsym"][time]["high"] = api_data["Data"][time]["high"]
+        client_response["tsym"][time]["low"] = api_data["Data"][time]["low"]
+        client_response["tsym"][time]["open"] = api_data["Data"][time]["open"]
+        client_response["tsym"][time]["volumefrom"] = api_data["Data"][time]["volumefrom"]
+        client_response["tsym"][time]["volumeto"] = api_data["Data"][time]["volumeto"]
+
+
+
+      end
+    end
     json_response(client_response || {})
   end
 
@@ -62,5 +85,21 @@ class CoinsController < ApplicationController
     http.use_ssl = true
     request = Net::HTTP::Get.new(url.to_s)
     response = http.request(request)
+  end
+
+  def calcLimit(fdate)
+    today = Time.now.to_date
+    return (today - fdate).to_i
+  end
+
+  def calcTime(fdate, tdate)
+    arr = []
+    timeLength = (tdate - fdate).to_i
+    x = 0
+    until x > timeLength do
+      arr << x
+      x +=1
+    end
+    return arr
   end
 end
