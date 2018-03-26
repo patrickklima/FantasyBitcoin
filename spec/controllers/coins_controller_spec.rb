@@ -90,10 +90,10 @@ describe CoinsController do
     end
   end
 
-  describe "GET coin" do
+  describe "GET coin_pair_deail" do
     context "with a successful response" do
       it "returns the time field for the coin for each day", :vcr do
-        get :coin, params: { fsym: "ETH", tsym: "USD", fdate: "2018-03-21", tdate: "2018-03-23"}
+        get :coin_pair_detail, params: { fsym: "ETH", tsym: "USD", fdate: "2018-03-21", tdate: "2018-03-23", market: "Bitfinex"}
         body = JSON.parse response.body
         expect(body["tsym"]["0"]["time"]).to eq(1521590400)
         expect(body["tsym"]["1"]["time"]).to eq(1521676800)
@@ -101,57 +101,52 @@ describe CoinsController do
       end
 
       it "returns the close field for the coin for each day", :vcr do
-        get :coin, params: { fsym: "ETH", tsym: "USD", fdate: "2018-03-21", tdate: "2018-03-23"}
+        get :coin_pair_detail, params: { fsym: "ETH", tsym: "USD", fdate: "2018-03-21", tdate: "2018-03-23", market: "Bitfinex"}
         body = JSON.parse response.body
-        expect(body["tsym"]["0"]["close"]).to eq(559.91)
-        expect(body["tsym"]["1"]["close"]).to eq(539.89)
-        expect(body["tsym"]["2"]["close"]).to eq(543.83)
+        expect(body["tsym"]["0"]["close"]).to eq(558.78)
+        expect(body["tsym"]["1"]["close"]).to eq(539.19)
+        expect(body["tsym"]["2"]["close"]).to eq(543.85)
       end
 
       it "returns the high field for the coin for each day", :vcr do
-        get :coin, params: { fsym: "ETH", tsym: "USD", fdate: "2018-03-21", tdate: "2018-03-23"}
+        get :coin_pair_detail, params: { fsym: "ETH", tsym: "USD", fdate: "2018-03-21", tdate: "2018-03-23", market: "Bitfinex"}
         body = JSON.parse response.body
-        expect(body["tsym"]["0"]["high"]).to eq(590.2)
-        expect(body["tsym"]["1"]["high"]).to eq( 578.01)
-        expect(body["tsym"]["2"]["high"]).to eq(543.84)
+        expect(body["tsym"]["0"]["high"]).to eq(590.11)
+        expect(body["tsym"]["1"]["high"]).to eq(578.18)
+        expect(body["tsym"]["2"]["high"]).to eq(544.28)
       end
 
       it "returns the low field for the coin for each day", :vcr do
-        get :coin, params: { fsym: "ETH", tsym: "USD", fdate: "2018-03-21", tdate: "2018-03-23"}
+        get :coin_pair_detail, params: { fsym: "ETH", tsym: "USD", fdate: "2018-03-21", tdate: "2018-03-23", market: "Bitfinex"}
         body = JSON.parse response.body
-        expect(body["tsym"]["0"]["low"]).to eq(545.48)
-        expect(body["tsym"]["1"]["low"]).to eq(516.22)
-        expect(body["tsym"]["2"]["low"]).to eq(506.79)
+        expect(body["tsym"]["0"]["low"]).to eq(544.49)
+        expect(body["tsym"]["1"]["low"]).to eq(514)
+        expect(body["tsym"]["2"]["low"]).to eq(504.58)
       end
 
       it "returns the open field for the coin for each day", :vcr do
-        get :coin, params: { fsym: "ETH", tsym: "USD", fdate: "2018-03-21", tdate: "2018-03-23"}
+        get :coin_pair_detail, params: { fsym: "ETH", tsym: "USD", fdate: "2018-03-21", tdate: "2018-03-23", market: "Bitfinex"}
         body = JSON.parse response.body
-        expect(body["tsym"]["0"]["open"]).to eq(557.57)
-        expect(body["tsym"]["1"]["open"]).to eq(559.91)
-        expect(body["tsym"]["2"]["open"]).to eq(539.89)
+        expect(body["tsym"]["0"]["open"]).to eq(556.38)
+        expect(body["tsym"]["1"]["open"]).to eq(558.78)
+        expect(body["tsym"]["2"]["open"]).to eq(539.19)
       end
 
       it "returns the volumefrom field for the coin for each day", :vcr do
-        get :coin, params: { fsym: "ETH", tsym: "USD", fdate: "2018-03-21", tdate: "2018-03-23"}
+        get :coin_pair_detail, params: { fsym: "ETH", tsym: "USD", fdate: "2018-03-21", tdate: "2018-03-23", market: "Bitfinex"}
         body = JSON.parse response.body
-        expect(body["tsym"]["0"]["volumefrom"]).to eq(488509.24)
-        expect(body["tsym"]["1"]["volumefrom"]).to eq(431953.84)
-        expect(body["tsym"]["2"]["volumefrom"]).to eq(432407.55)
+        expect(body["tsym"]["0"]["volumefrom"]).to eq(184758.56)
+        expect(body["tsym"]["1"]["volumefrom"]).to eq(174861.03)
+        expect(body["tsym"]["2"]["volumefrom"]).to eq(192973.83)
       end
 
       it "returns the volumeto field for the coin for each day", :vcr do
-        get :coin, params: { fsym: "ETH", tsym: "USD", fdate: "2018-03-21", tdate: "2018-03-23"}
+        get :coin_pair_detail, params: { fsym: "ETH", tsym: "USD", fdate: "2018-03-21", tdate: "2018-03-23", market: "Bitfinex"}
         body = JSON.parse response.body
-        expect(body["tsym"]["0"]["volumeto"]).to eq(277714049.38)
-        expect(body["tsym"]["1"]["volumeto"]).to eq(233985932.96)
-        expect(body["tsym"]["2"]["volumeto"]).to eq(225200086.3)
+        expect(body["tsym"]["0"]["volumeto"]).to eq(104635517.5)
+        expect(body["tsym"]["1"]["volumeto"]).to eq(94593925.52)
+        expect(body["tsym"]["2"]["volumeto"]).to eq(100048838.67)
       end
-
-
-
-
-
     end
   end
 
